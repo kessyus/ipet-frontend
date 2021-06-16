@@ -2,11 +2,11 @@ import { TYPES } from '../actions/auth';
 import { getToken, getUser } from '../../config/auth';
 
 const INITIAL_STATE = {
-  isAdmin: getUser().tipo === '1' || false,
   loading: false,
   token: getToken() || '',
   usuario: getUser() || {},
   error: [],
+  registered: false
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -17,20 +17,20 @@ const reducer = (state = INITIAL_STATE, action) => {
       return state;
     case TYPES.SIGN_IN:
       state.token = action.data.token;
-      state.usuario = action.data.usuario;
-      state.isAdmin = action.data.usuario.tipo === '1';
+      state.usuario = action.data.userDTO;
       state.loading = false;
       return state;
-    case TYPES.SIGN_ERROR:
-      const err = [...state.error, action.data];
-      state.loading = false;
-      state.error = err;
-      return state;
+    case TYPES.SIGN_UP:
+      state.registered = true
+      state.token = action.data.token
+      state.usuario = action.data.userDTO
+      state.loading = false
+      return state
     case TYPES.SIGN_OUT:
       state.token = '';
       state.usuario = {};
-      state.isAdmin = false;
       state.error = [];
+      state.loading = false;
       return state;
     default:
       return state;

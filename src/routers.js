@@ -7,6 +7,8 @@ import history from './config/history';
 
 // Views
 import Home from './views/home';
+import Login from './views/login';
+import Logout from './views/logout';
 
 // const AdminRoute = ({ ...data }) => {
 //   if (!isAuthenticated()) {
@@ -30,6 +32,8 @@ const Routers = () => {
       <Layout page="iPet">
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/logout" component={Logout} />
           {/* <Route exact path="/categoria/:id" component={Detalhes} /> */}
 
           {/* ADMIN */}
