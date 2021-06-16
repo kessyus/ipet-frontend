@@ -2,28 +2,39 @@ import { Fragment, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { useSelector } from 'react-redux';
+// import { isAuthenticated } from '../../config/auth';
+import { useDispatch } from 'react-redux';
+import { logoutAction } from '../../store/actions/auth';
+
+// Profiles
+// 1 - Admin
+// 2 - Supplier
+// 3 - Customer
 
 const navigation = [
-  { label: "Dashboard", route: "/" },
-  { label: "Serviços", route: "/service" },
-  { label: "Fornecedores", route: "/supplier" },
-  { label: "Clientes", route: "/customer" },
-  { label: "Relatórios", route: "/report" },
+  { label: "Home", route: "/", profile: [] },
+  { label: "Serviços", route: "/service", profile: [] },
+  { label: "Fornecedores", route: "/supplier", profile: [1] },
+  { label: "Contato", route: "/about", profile: [] },
+  { label: "Clientes", route: "/customer", profile: [1] },
+  { label: "Vendas", route: "/sales", profile: [2] },
+  { label: "Relatórios", route: "/report", profile: [1] },
 ];
 const profile = [
-  { label: "Perfil", route: "/profile" },
-  { label: "Configurações", route: "/config" },
-  { label: "Sign out", route: "/logout" },
+  { label: "Perfil", route: "/profile", profile: [] },
+  { label: "Sign out", route: "/logout", profile: [] },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Header() {
+const Header = () => {
   let location = useLocation();
+  const dispatch = useDispatch();
   const [currentRoute, setCurrentRoute] = useState(location.pathname);
-  const [pageTitle, setPageTitle] = useState("Dashboard");
+  const [pageTitle, setPageTitle] = useState("Home");
 
   useEffect(() => {
     setCurrentRoute(location.pathname);
@@ -33,7 +44,13 @@ export default function Header() {
       );
   }, [currentRoute, location]);
 
-  console.log(location.pathname);
+  // const userType = useSelector((state) => state.auth.usuario.userType);
+  const userName = useSelector((state) => state.auth.usuario.nome);
+  const userEmail = useSelector((state) => state.auth.usuario.email);
+
+  const logout = () => {
+    dispatch(logoutAction());
+  }
 
   return (
     <div>
@@ -78,20 +95,20 @@ export default function Header() {
                 <div className="hidden md:block">
                   <div className="ml-4 flex items-center md:ml-6">
                     <button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                      <span className="sr-only">View notifications</span>
+                      <span className="sr-only">Ver notificações</span>
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
 
                     {/* Profile dropdown */}
-                    <Menu as="div" className="ml-3 relative">
+                    <Menu as="div" className="ml-3 relative z-50">
                       {({ open }) => (
                         <>
                           <div>
                             <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                              <span className="sr-only">Open user menu</span>
+                              <span className="sr-only">Menu do usuário</span>
                               <img
                                 className="h-8 w-8 rounded-full"
-                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                src="https://upload-ipet.s3-us-west-2.amazonaws.com/2881552b30d3b0b40d45465efa790b6b-minhafoto.png"
                                 alt=""
                               />
                             </Menu.Button>
@@ -114,7 +131,8 @@ export default function Header() {
                                 <Menu.Item key={item.label}>
                                   {({ active }) => (
                                     <Link
-                                      to={item.route}
+                                      to={item.route === '/logout' ? '' : item.route}
+                                      onClick={item.route === '/logout' ? logout : ''}
                                       className={classNames(
                                         active ? "bg-gray-100" : "",
                                         "block px-4 py-2 text-sm text-gray-700"
@@ -135,7 +153,7 @@ export default function Header() {
                 <div className="-mr-2 flex md:hidden">
                   {/* Mobile menu button */}
                   <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                    <span className="sr-only">Open main menu</span>
+                    <span className="sr-only">Abrir menu</span>
                     {open ? (
                       <XIcon className="block h-6 w-6" aria-hidden="true" />
                     ) : (
@@ -174,16 +192,16 @@ export default function Header() {
                   <div className="flex-shrink-0">
                     <img
                       className="h-10 w-10 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src="https://upload-ipet.s3-us-west-2.amazonaws.com/2881552b30d3b0b40d45465efa790b6b-minhafoto.png"
                       alt=""
                     />
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">
-                      Tom Cook
+                      {userName || ''}
                     </div>
                     <div className="text-sm font-medium leading-none text-gray-400">
-                      tom@example.com
+                      {userEmail || ''}
                     </div>
                   </div>
                   <button className="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
@@ -207,12 +225,8 @@ export default function Header() {
           </>
         )}
       </Disclosure>
-
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">{pageTitle}</h1>
-        </div>
-      </header>
     </div>
   );
 }
+
+export default Header;

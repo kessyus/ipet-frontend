@@ -3,9 +3,11 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 // reducers
+import { reducer as toastrReducer } from 'react-redux-toastr'
 import SignReducer from './reducers/auth';
 
 const reducers = combineReducers({
+  toastr: toastrReducer,
   auth: SignReducer,
 });
 
