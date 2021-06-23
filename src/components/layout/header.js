@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { MenuIcon, XIcon, LoginIcon } from "@heroicons/react/outline";
 import { useSelector } from 'react-redux';
 // import { isAuthenticated } from '../../config/auth';
 import { useDispatch } from 'react-redux';
@@ -13,17 +13,14 @@ import { logoutAction } from '../../store/actions/auth';
 // 3 - Customer
 
 const navigation = [
-  { label: "Home", route: "/", profile: [] },
-  { label: "Serviços", route: "/service", profile: [] },
-  { label: "Fornecedores", route: "/supplier", profile: [1] },
-  { label: "Contato", route: "/about", profile: [] },
-  { label: "Clientes", route: "/customer", profile: [1] },
-  { label: "Vendas", route: "/sales", profile: [2] },
-  { label: "Relatórios", route: "/report", profile: [1] },
+  { label: "Home", route: "/", profile: null },
+  { label: "Serviços", route: "/service", profile: null },
+  { label: "Contato", route: "/about", profile: null },
+  { label: "Usuários", route: "/userlist", profile: 1 },
 ];
 const profile = [
-  { label: "Perfil", route: "/profile", profile: [] },
-  { label: "Sign out", route: "/logout", profile: [] },
+  { label: "Perfil", route: "/profile" },
+  { label: "Sign out", route: "/logout" },
 ];
 
 function classNames(...classes) {
@@ -45,8 +42,9 @@ const Header = () => {
   }, [currentRoute, location]);
 
   // const userType = useSelector((state) => state.auth.usuario.userType);
-  const userName = useSelector((state) => state.auth.usuario.nome);
-  const userEmail = useSelector((state) => state.auth.usuario.email);
+  const userName = useSelector((state) => state.auth.user.nome);
+  const userEmail = useSelector((state) => state.auth.user.email);
+  const userType = useSelector((state) => state.auth.user.userType);
 
   const logout = () => {
     dispatch(logoutAction());
@@ -70,47 +68,42 @@ const Header = () => {
                   <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
                       {navigation.map((item) =>
-                        pageTitle === item.label ? (
-                          <Fragment key={item.label}>
+                        (item.profile === userType || item.profile === null) ? (
+                          pageTitle === item.label ? (
+                            <Fragment key={item.label}>
+                              <Link
+                                to={item.route}
+                                className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                              >
+                                {item.label}
+                              </Link>
+                            </Fragment>
+                          ) : (
                             <Link
+                              key={item.label}
                               to={item.route}
-                              className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                              className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                             >
                               {item.label}
                             </Link>
-                          </Fragment>
-                        ) : (
-                          <Link
-                            key={item.label}
-                            to={item.route}
-                            className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                          >
-                            {item.label}
-                          </Link>
-                        )
+                          )
+                        ) : ('')
                       )}
                     </div>
                   </div>
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-4 flex items-center md:ml-6">
-                    <button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                      <span className="sr-only">Ver notificações</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
 
                     {/* Profile dropdown */}
+                    { userEmail ? (
                     <Menu as="div" className="ml-3 relative z-50">
                       {({ open }) => (
                         <>
                           <div>
-                            <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                            <Menu.Button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                               <span className="sr-only">Menu do usuário</span>
-                              <img
-                                className="h-8 w-8 rounded-full"
-                                src="https://upload-ipet.s3-us-west-2.amazonaws.com/2881552b30d3b0b40d45465efa790b6b-minhafoto.png"
-                                alt=""
-                              />
+                              <LoginIcon className="h-6 w-6" aria-hidden="true" />
                             </Menu.Button>
                           </div>
                           <Transition
@@ -131,8 +124,9 @@ const Header = () => {
                                 <Menu.Item key={item.label}>
                                   {({ active }) => (
                                     <Link
+                                      key={item.label}
                                       to={item.route === '/logout' ? '' : item.route}
-                                      onClick={item.route === '/logout' ? logout : ''}
+                                      onClick={item.route === '/logout' ? logout : null}
                                       className={classNames(
                                         active ? "bg-gray-100" : "",
                                         "block px-4 py-2 text-sm text-gray-700"
@@ -148,6 +142,7 @@ const Header = () => {
                         </>
                       )}
                     </Menu>
+                    ) : '' }
                   </div>
                 </div>
                 <div className="-mr-2 flex md:hidden">
@@ -187,16 +182,10 @@ const Header = () => {
                   )
                 )}
               </div>
+              { userEmail ? (
               <div className="pt-4 pb-3 border-t border-gray-700">
                 <div className="flex items-center px-5">
-                  <div className="flex-shrink-0">
-                    <img
-                      className="h-10 w-10 rounded-full"
-                      src="https://upload-ipet.s3-us-west-2.amazonaws.com/2881552b30d3b0b40d45465efa790b6b-minhafoto.png"
-                      alt=""
-                    />
-                  </div>
-                  <div className="ml-3">
+                  <div>
                     <div className="text-base font-medium leading-none text-white">
                       {userName || ''}
                     </div>
@@ -204,16 +193,13 @@ const Header = () => {
                       {userEmail || ''}
                     </div>
                   </div>
-                  <button className="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
                 </div>
                 <div className="mt-3 px-2 space-y-1">
                   {profile.map((item) => (
                     <Link
                       key={item.label}
-                      to={item.route}
+                      to={item.route === '/logout' ? '' : item.route}
+                      onClick={item.route === '/logout' ? logout : null}
                       className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
                     >
                       {item.label}
@@ -221,6 +207,7 @@ const Header = () => {
                   ))}
                 </div>
               </div>
+              ) : '' }
             </Disclosure.Panel>
           </>
         )}

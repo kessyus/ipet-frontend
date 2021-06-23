@@ -8,7 +8,7 @@ const getToken = () => {
 
 const getUser = () => {
   const data = JSON.parse(localStorage.getItem(TOKEN_KEY));
-  if (data && data.usuario) return data.usuario;
+  if (data && data.user) return data.user;
   return false;
 };
 

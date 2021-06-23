@@ -16,7 +16,6 @@ export const signInAction = (data) => async (dispatch) => {
 
   try {
     const result = await authService(data);
-    console.log(result.data.data);
     if (result.data) {
       saveAuth(result.data?.data);
       http.defaults.headers.token = result.data.data.token;
