@@ -1,5 +1,5 @@
 import { removeToken, saveAuth } from '../../config/auth';
-import authService from '../../services/auth';
+import authService from '../../services/auth.service';
 import history from '../../config/history';
 import http from '../../config/http';
 import { toastr } from 'react-redux-toastr';

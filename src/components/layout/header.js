@@ -162,24 +162,26 @@ const Header = () => {
             <Disclosure.Panel className="md:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {navigation.map((item) =>
-                  pageTitle === item.label ? (
-                    <Fragment key={item.label}>
+                  (item.profile === userType || item.profile === null) ? (
+                    pageTitle === item.label ? (
+                      <Fragment key={item.label}>
+                        <Link
+                          to={item.route}
+                          className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                        >
+                          {item.label}
+                        </Link>
+                      </Fragment>
+                    ) : (
                       <Link
+                        key={item.label}
                         to={item.route}
-                        className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                       >
                         {item.label}
                       </Link>
-                    </Fragment>
-                  ) : (
-                    <Link
-                      key={item.label}
-                      to={item.route}
-                      className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                    >
-                      {item.label}
-                    </Link>
-                  )
+                    )
+                  ) : ('')
                 )}
               </div>
               { userEmail ? (
