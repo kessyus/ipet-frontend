@@ -25,7 +25,6 @@ const Customer = () => {
         history.push('/');
       })
       .catch((err) => {
-        console.log(err);
         toastr.error('Usuário', 'Erro ao criar o usuário. Verifique se os campos obrigatórios foram preenchidos.');
         setLoading(false);
       });
@@ -74,6 +73,54 @@ const Customer = () => {
                         disabled={loading}
                         required
                         autoComplete="email"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+                    
+                    <div className="col-span-6">
+                      <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                        Senha
+                      </label>
+                      <input
+                        type="password"
+                        name="senha"
+                        value={form.senha || ''}
+                        onChange={handleChange}
+                        disabled={loading}
+                        required
+                        autoComplete="password"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+
+                    <div className="col-span-6 sm:col-span-3">
+                      <label htmlFor="documento" className="block text-sm font-medium text-gray-700">
+                        Documento
+                      </label>
+                      <input
+                        type="documento"
+                        name="documento"
+                        value={form.documento || ''}
+                        onChange={handleChange}
+                        disabled={loading}
+                        required
+                        autoComplete="documento"
+                        className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+
+                    <div className="col-span-6 sm:col-span-3">
+                      <label htmlFor="contato" className="block text-sm font-medium text-gray-700">
+                        Contato
+                      </label>
+                      <input
+                        type="contato"
+                        name="contato"
+                        value={form.contato || ''}
+                        onChange={handleChange}
+                        disabled={loading}
+                        required
+                        autoComplete="contato"
                         className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>

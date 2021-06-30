@@ -1,25 +1,21 @@
 import { Fragment, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { MenuIcon, XIcon, LoginIcon } from "@heroicons/react/outline";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useSelector } from 'react-redux';
-// import { isAuthenticated } from '../../config/auth';
 import { useDispatch } from 'react-redux';
 import { logoutAction } from '../../store/actions/auth';
-
-// Profiles
-// 1 - Admin
-// 2 - Supplier
-// 3 - Customer
 
 const navigation = [
   { label: "Home", route: "/", profile: null },
   { label: "Serviços", route: "/service", profile: null },
   { label: "Contato", route: "/about", profile: null },
-  { label: "Usuários", route: "/userlist", profile: 1 },
+  { label: "Usuários", route: "/userlist", profile: 'admin' },
+  { label: "Fornecedores", route: "/supplierlist", profile: 'admin' },
+  { label: "Categorias", route: "/category", profile: 'admin' },
+  { label: "Produtos", route: "/product", profile: 'supplier' },
 ];
 const profile = [
-  { label: "Perfil", route: "/profile" },
   { label: "Sign out", route: "/logout" },
 ];
 
@@ -41,7 +37,6 @@ const Header = () => {
       );
   }, [currentRoute, location]);
 
-  // const userType = useSelector((state) => state.auth.usuario.userType);
   const userName = useSelector((state) => state.auth.user.nome);
   const userEmail = useSelector((state) => state.auth.user.email);
   const userType = useSelector((state) => state.auth.user.userType);
@@ -103,7 +98,7 @@ const Header = () => {
                           <div>
                             <Menu.Button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                               <span className="sr-only">Menu do usuário</span>
-                              <LoginIcon className="h-6 w-6" aria-hidden="true" />
+                              { userName }
                             </Menu.Button>
                           </div>
                           <Transition

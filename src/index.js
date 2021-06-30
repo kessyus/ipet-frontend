@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import './index.css';
 import store from './store';
 import Routers from './routers';
+import './index.css';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import ReduxToastr from './components/redux-toastr';
 

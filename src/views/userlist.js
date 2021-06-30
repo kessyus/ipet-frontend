@@ -1,4 +1,4 @@
-import List from '../components/user/list';
+import List from '../components/user/customer/list';
 
 const UserList = () => {
   return <List />;

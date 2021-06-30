@@ -1,37 +1,38 @@
 import React from 'react';
-import { Redirect, Router, Switch, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import history from './config/history';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import Layout from './components/layout';
 import { isAuthenticated } from './config/auth';
+import { useSelector } from 'react-redux';
+import history from './config/history';
 
 // Views
 import Home from './views/home';
 import Login from './views/login';
 import NewCustomer from './views/customer';
 import UserList from './views/userlist';
+import SupplierList from './views/supplierlist';
 
 const PrivateRoute = ({ ...data }) => {
   if (!isAuthenticated()) {
     return <Redirect to="/login" />;
   }
 
-  const hasAdmin = Object.keys(data).includes('admin') && !(data.profile === 1);
+  const hasAdmin = Object.keys(data).includes('admin') && !data.admin;
+  const hasCustomer = Object.keys(data).includes('customer') && !data.customer;
+  const hasSupplier = Object.keys(data).includes('supplier') && !data.supplier;
 
-  if (hasAdmin) {
+  if (hasAdmin || hasCustomer || hasSupplier) {
     return <Redirect to="/" />;
   }
+
 
   return <Route {...data} />;
 };
 
-// Profiles
-// 1 - Admin
-// 2 - Supplier
-// 3 - Customer
-
 const Routers = () => {
-  const userProfile = useSelector((state) => state.auth.user?.userType);
+  const isAdmin = (useSelector((state) => state.auth.user?.userType) === 'admin');
+  const isSupplier = (useSelector((state) => state.auth.user?.userType) === 'supplier');
+  // const isCustomer = (useSelector((state) => state.auth.user?.userType) === 'customer');
 
   return (
     <Router history={history}>
@@ -46,11 +47,28 @@ const Routers = () => {
           <PrivateRoute
             exact
             path="/userlist"
-            profile={userProfile}
-            admin
+            admin={isAdmin}
             component={UserList}
           />
-
+          <PrivateRoute
+            exact
+            path="/supplierlist"
+            admin={isAdmin}
+            component={SupplierList}
+          />
+          <PrivateRoute
+            exact
+            path="/category"
+            admin={isAdmin}
+            component={UserList}
+          />
+          <PrivateRoute
+            exact
+            path="/product"
+            supplier={isSupplier}
+            component={UserList}
+          />
+          
           <Redirect from="*" to="/" />
         </Switch>
       </Layout>
