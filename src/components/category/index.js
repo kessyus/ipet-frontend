@@ -92,7 +92,7 @@ const Categories = () => {
                     {/* <input accept="image/*" type="file" name="file" required onChange={(e) => setSelectedFile(e.target.files[0])} /> */}
                     <FileUploader 
                       onFileSelectSuccess={(file) => setSelectedFile(file)} 
-                      onFileSelectError={({ error }) => alert(error)}
+                      onFileSelectError={({ error }) => toastr.error('Arquivo', error)}
                     />  
 
                   </div>

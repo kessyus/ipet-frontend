@@ -29,7 +29,7 @@ export const signInAction = (data) => {
       toastr.success('Login', 'Login realizado com sucesso!');
     } catch (error) {
       dispatch({ type: TYPES.SIGN_ERROR, data: error });
-      toastr.error('Login', 'Usuário ou senha inválidos ou sua conta está inativa.');
+      toastr.error('Login', 'Usuário não autorizado.');
     }
   };
 };

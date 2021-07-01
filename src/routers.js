@@ -15,6 +15,7 @@ import Category from './views/category';
 import NewSupplier from './views/supplier';
 import SupplierUnderApproval from './views/supplierUnderApproval';
 import NewCategory from './views/categoryNew';
+import Product from './views/product';
 
 const PrivateRoute = ({ ...data }) => {
   if (!isAuthenticated()) {
@@ -47,6 +48,7 @@ const Routers = () => {
           <Route exact path="/new_customer" component={NewCustomer} />
           <Route exact path="/new_supplier" component={NewSupplier} />
           <Route exact path="/supplierapproval" component={SupplierUnderApproval} />
+          <Route exact path="/product" component={Product} />
           {/* <Route exact path="/categoria/:id" component={Detalhes} /> */}
 
           {/* Private Routes */}
