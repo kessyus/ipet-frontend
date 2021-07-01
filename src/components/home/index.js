@@ -23,7 +23,7 @@ const Home = () => {
                   <span className="block text-indigo-600 xl:inline"> de quatro patas</span>
                 </h1>
                 <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  O iPet é para <b>você</b> que, assim como nós, é um amante dos animais! Aqui nós cuidamos para que os melhores prestadores de serviço possam te auxiliar com as necessidades dos seus <b>pets</b>.
+                  O iPet é para <b>você</b> que, assim como nós, é um amante dos animais! Aqui nós cuidamos para que os melhores prestadores de serviços possam te auxiliar com as necessidades dos seus <b>pets</b>.
                 </p>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                   <div className="shadow rounded-md">

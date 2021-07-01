@@ -9,7 +9,6 @@ import { logoutAction } from '../../store/actions/auth';
 const navigation = [
   { label: "Home", route: "/", profile: null },
   { label: "Serviços", route: "/product", profile: null },
-  { label: "Contato", route: "/about", profile: null },
   { label: "Usuários", route: "/userlist", profile: 'admin' },
   { label: "Fornecedores", route: "/supplierlist", profile: 'admin' },
   { label: "Categorias", route: "/category", profile: 'admin' },
