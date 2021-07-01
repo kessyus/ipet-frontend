@@ -11,6 +11,10 @@ import Login from './views/login';
 import NewCustomer from './views/customer';
 import UserList from './views/userlist';
 import SupplierList from './views/supplierlist';
+import Category from './views/category';
+import NewSupplier from './views/supplier';
+import SupplierUnderApproval from './views/supplierUnderApproval';
+import NewCategory from './views/categoryNew';
 
 const PrivateRoute = ({ ...data }) => {
   if (!isAuthenticated()) {
@@ -41,6 +45,8 @@ const Routers = () => {
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/new_customer" component={NewCustomer} />
+          <Route exact path="/new_supplier" component={NewSupplier} />
+          <Route exact path="/supplierapproval" component={SupplierUnderApproval} />
           {/* <Route exact path="/categoria/:id" component={Detalhes} /> */}
 
           {/* Private Routes */}
@@ -60,7 +66,13 @@ const Routers = () => {
             exact
             path="/category"
             admin={isAdmin}
-            component={UserList}
+            component={Category}
+          />
+          <PrivateRoute
+            exact
+            path="/new_category"
+            admin={isAdmin}
+            component={NewCategory}
           />
           <PrivateRoute
             exact
