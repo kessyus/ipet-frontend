@@ -14,4 +14,5 @@
   flex-direction:column;
   min-height: 100vh;
   background-color: #EDF2F6;
+  background-image: url('assets/img/background_small-1.png');
 }

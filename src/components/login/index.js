@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { signInAction } from '../../store/actions/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { LockClosedIcon } from '@heroicons/react/solid';
+import Logo from '../../assets/img/logo_1.png';
 
 const Login = (props) => {
 
@@ -28,8 +29,8 @@ const Login = (props) => {
       <div className="max-w-md w-full space-y-8">
         <div>
           <img
-            className="mx-auto h-12 w-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+            className="mx-auto h-16 w-auto"
+            src={Logo}
             alt="Workflow"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Faça o login na sua conta</h2>

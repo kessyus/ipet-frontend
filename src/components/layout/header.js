@@ -5,6 +5,7 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { logoutAction } from '../../store/actions/auth';
+import Logo from '../../assets/img/logo_3.png';
 
 const navigation = [
   { label: "Home", route: "/", profile: null },
@@ -54,8 +55,8 @@ const Header = () => {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <img
-                      className="h-8 w-8"
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                      className="h-8 w-24"
+                      src={Logo}
                       alt="Workflow"
                     />
                   </div>
