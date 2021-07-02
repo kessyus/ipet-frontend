@@ -17,6 +17,7 @@ import Category from './views/category';
 import NewCategory from './views/categoryNew';
 import Product from './views/product';
 import ProductList from './views/productlist';
+import ProductCategory from './views/productCategory';
 import NewProduct from './views/productNew';
 
 const PrivateRoute = ({ ...data }) => {
@@ -51,7 +52,7 @@ const Routers = () => {
           <Route exact path="/new_supplier" component={NewSupplier} />
           <Route exact path="/supplierapproval" component={SupplierUnderApproval} />
           <Route exact path="/product" component={Product} />
-          {/* <Route exact path="/categoria/:id" component={Detalhes} /> */}
+          <Route exact path="/product/:id" component={ProductCategory} />
 
           {/* Private Routes */}
           <PrivateRoute

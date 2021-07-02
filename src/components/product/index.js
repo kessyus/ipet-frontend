@@ -20,7 +20,7 @@ const Service = () => {
 
   return (
     <>
-      <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Explore os nossos Serviços</h2>
+      <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Explore os nossos serviços</h2>
       <p className="mt-2 mb-6 text-center text-sm text-gray-600">
         Mais comodidade para os seus peludinhos!
       </p>
@@ -40,7 +40,7 @@ const Service = () => {
               </div>
               <div className="p-8">
                 <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Serviços</div>
-                <Link to="#" className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{item.nome}</Link>
+                <Link to={'/product/' + item._id} className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{item.nome}</Link>
                 <p className="mt-2 text-gray-500">{item.descricao}</p>
               </div>
             </div>

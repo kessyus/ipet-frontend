@@ -100,7 +100,7 @@ const SupplierList = () => {
                   ))
                 ) : (
                   <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Loading...</td>
+                    <td colSpan="4" className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sem fornecedores cadastrados.</td>
                   </tr>
                 )}
                 </tbody>

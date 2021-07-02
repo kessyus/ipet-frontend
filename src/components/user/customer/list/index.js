@@ -94,7 +94,7 @@ const UserList = () => {
                   ))
                 ) : (
                   <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Loading...</td>
+                    <td colSpan="5" className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sem clientes cadastrados.</td>
                   </tr>
                 )}
                 </tbody>

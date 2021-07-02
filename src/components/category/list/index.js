@@ -110,7 +110,7 @@ const CategoryList = () => {
                   ))
                 ) : (
                   <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Loading...</td>
+                    <td colSpan="6" className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Sem categorias cadastradas.</td>
                   </tr>
                 )}
                 </tbody>
