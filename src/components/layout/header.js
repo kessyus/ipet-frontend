@@ -13,7 +13,7 @@ const navigation = [
   { label: "Usuários", route: "/userlist", profile: 'admin' },
   { label: "Fornecedores", route: "/supplierlist", profile: 'admin' },
   { label: "Categorias", route: "/category", profile: 'admin' },
-  { label: "Produtos", route: "/product", profile: 'supplier' },
+  { label: "Produtos", route: "/productlist", profile: 'supplier' },
 ];
 const profile = [
   { label: "Sign out", route: "/logout" },

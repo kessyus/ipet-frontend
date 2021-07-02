@@ -8,14 +8,16 @@ import history from './config/history';
 // Views
 import Home from './views/home';
 import Login from './views/login';
-import NewCustomer from './views/customer';
 import UserList from './views/userlist';
+import NewCustomer from './views/customer';
 import SupplierList from './views/supplierlist';
-import Category from './views/category';
-import NewSupplier from './views/supplier';
 import SupplierUnderApproval from './views/supplierUnderApproval';
+import NewSupplier from './views/supplier';
+import Category from './views/category';
 import NewCategory from './views/categoryNew';
 import Product from './views/product';
+import ProductList from './views/productlist';
+import NewProduct from './views/productNew';
 
 const PrivateRoute = ({ ...data }) => {
   if (!isAuthenticated()) {
@@ -78,11 +80,17 @@ const Routers = () => {
           />
           <PrivateRoute
             exact
-            path="/product"
+            path="/productlist"
             supplier={isSupplier}
-            component={UserList}
+            component={ProductList}
           />
-          
+          <PrivateRoute
+            exact
+            path="/new_product"
+            supplier={isSupplier}
+            component={NewProduct}
+          />
+
           <Redirect from="*" to="/" />
         </Switch>
       </Layout>

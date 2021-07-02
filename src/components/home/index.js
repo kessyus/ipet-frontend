@@ -54,7 +54,7 @@ const Home = () => {
               Faça parte da comunidade iPet
             </p>
             <p className="max-w-2xl mt-4 text-xl text-gray-500 lg:mx-auto">
-              Encontre, use e avalie os melhores profissionais mais próximos de você.
+              Encontre, experimente e avalie os melhores profissionais mais próximos de você.
             </p>
           </div>
 

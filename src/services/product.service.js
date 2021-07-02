@@ -1,16 +1,11 @@
 import http from '../config/http';
 
-const getAllCategories = () => http.get('/category');
-const getCategoryById = (id) => http.get(`/category/${id}`);
-// const createCategories = (data, config = {}) => http.post('/category', data, config);
-const createCategories = (data) => http.post('/category', data);
-const deleteCategoryById = (id) => http.delete(`/category/${id}`);
-const changeCategoryById = (id, data, config = {}) => http.put(`/category/${id}`, data, config);
+const getAllProductByCategory = (id) => http.get(`/product/category/${id}`);
+const getAllProductBySupplier = (id) => http.get(`/product/supplier/${id}`);
+const createProduct = (data) => http.post('/product', data);
 
-export { 
-  getAllCategories,
-  getCategoryById,
-  createCategories,
-  changeCategoryById,
-  deleteCategoryById
+export {
+  getAllProductByCategory,
+  getAllProductBySupplier,
+  createProduct
 };
