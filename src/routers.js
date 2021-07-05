@@ -19,6 +19,7 @@ import Product from './views/product';
 import ProductList from './views/productlist';
 import ProductCategory from './views/productCategory';
 import NewProduct from './views/productNew';
+import AdminProductList from './views/productlistadm';
 
 const PrivateRoute = ({ ...data }) => {
   if (!isAuthenticated()) {
@@ -90,6 +91,12 @@ const Routers = () => {
             path="/new_product"
             supplier={isSupplier}
             component={NewProduct}
+          />
+          <PrivateRoute
+            exact
+            path="/productlistadm"
+            admin={isAdmin}
+            component={AdminProductList}
           />
 
           <Redirect from="*" to="/" />

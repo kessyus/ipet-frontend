@@ -14,6 +14,7 @@ const navigation = [
   { label: "Fornecedores", route: "/supplierlist", profile: 'admin' },
   { label: "Categorias", route: "/category", profile: 'admin' },
   { label: "Produtos", route: "/productlist", profile: 'supplier' },
+  { label: "Produtos", route: "/productlistadm", profile: 'admin' },
 ];
 const profile = [
   { label: "Sign out", route: "/logout" },
